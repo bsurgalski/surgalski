@@ -14,16 +14,28 @@ df1 %>% group_by(State) %>% summarise(sum_sales = sum(Sales))
 
 df = read.csv("~/Downloads/WorldCupMatches.csv", header=T)
 head(df)
+
+#(b)
 summary(df)
+
+#(a)
 nrow(df)
 ncol(df)
+
+#(c)
 length(unique(df$City))
+
+#(d)
 mean(df$Attendance, na.rm = TRUE)
+
+#(e)
 aggregate(df$Home.Team.Goals)
 aggregate(df$Home.Team.Goals, by=list(df$Home.Team.Name), FUN=sum)
 
+#(f)
 df %>% group_by(Year) %>% summarise(avg_attendance = mean(Attendance, na.rm = TRUE))
 
+#3
 
 df2 = read.csv("~/Downloads/metabolite.csv", header=T)
 summary(df2)
