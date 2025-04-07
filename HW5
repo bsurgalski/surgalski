@@ -1,0 +1,31 @@
+#Question 1
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(lubridate)
+
+# Load dataset
+load("~/Downloads/house_prices.rda")
+
+#1a
+ggplot(house_prices, aes(x = date, y = house_price_index)) +
+  geom_line() +
+  facet_wrap(~ state) +
+  scale_x_date(breaks = ymd(c("1980-01-01", "2000-01-01", "2020-01-01")),
+               labels = c("’80", "’00", "’20")) +
+  labs(title = "House Price Index Over Time by State",
+       x = "Year", y = "House Price Index")
+
+#1b
+house_reshaped <- house_prices %>%
+  gather(key = "measure", value = "value", -c(date, state))
+
+#1c
+ggplot(house_reshaped, aes(x = date, y = value, color = measure)) +
+  geom_line() +
+  facet_wrap(~ state) +
+  scale_x_date(breaks = ymd(c("1980-01-01", "2000-01-01", "2020-01-01")),
+               labels = c("’80", "’00", "’20")) +
+  labs(title = "House Price Index & Unemployment Percentage Over Time by State",
+       x = "Year", y = "Value")
+
